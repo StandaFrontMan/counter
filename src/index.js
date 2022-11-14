@@ -2,32 +2,56 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-export default function GreetingAndTime() {
 
-  const user = {
-    firstName: 'Stas',
-    secondName: 'Vinogradov',
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      counter: 0,
+    }
   }
 
-  const getFormatUserName = () => {
-    if (user.firstName) {
-      return user.firstName + ' ' + user.secondName;
-    } else {
-      return 'Stranger';
-    };
+  increm = () => {
+    this.setState((state) => {
+      return {counter: state.counter + 1}
+    })
   }
 
-  const renderGreetingAndTime = () => {
-    const element = (
+  decrem = () => {
+    this.setState((state) => {
+      return {counter: state.counter - 1}
+    })
+  }
+
+  toZero = () => {
+    this.setState((state) => {
+      return {counter: state.counter = 0}
+    })
+  }
+
+  render () {
+    return (
       <div>
-        <h1>Hello, {getFormatUserName(user)} !</h1>
-        <h2>Date is {new Date().toLocaleDateString()} and Time is {new Date().toLocaleTimeString()}.</h2>
+        <h2>Counter is: {this.state.counter}</h2>
+        <button onClick={this.increm}>Increment !!!</button>
+        <button onClick={this.decrem}>Decrement !!!</button>
+        <button onClick={this.toZero}>Counter to Zero !!!</button>
       </div>
-    )
-    root.render(element);
+    );
   }
-  setInterval(renderGreetingAndTime, 1000)
 }
 
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(GreetingAndTime())
+root.render(<App />)
+
+
+
+
+
+
+
+
